@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Digital</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: radial-gradient(circle, #1a1a1a, #000);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Contenedor del logo */
+        .logo-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .logo-container img {
+            max-width: 50%;
+            height: auto;
+            filter: drop-shadow(0 0 10px #00aaff);
+        }
+
+        /* Banner publicitario */
+        .banner {
+            width: 100%;
+            max-width: 350px;
+            margin: 20px 0;
+            text-align: center;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .banner a {
+            display: inline-block;
+            width: 100%;
+        }
+
+        .banner img {
+            width: 100%;
+            border-radius: 10px;
+            filter: drop-shadow(0 0 10px #00aaff);
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .banner:hover {
+            transform: scale(1.02);
+            filter: drop-shadow(0 0 20px #00aaff);
+        }
+
+        /* Mensaje de bienvenida */
+        .welcome-message {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.2rem;
+            color: #00aaff;
+            text-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        /* Barra de búsqueda */
+        .search-bar {
+            text-align: center;
+            margin: 20px 0;
+            width: 100%;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        .search-bar input {
+            padding: 12px 24px;
+            width: 100%;
+            border: 2px solid #00aaff;
+            border-radius: 25px;
+            background-color: #1a1a1a;
+            color: #00aaff;
+            font-size: 1rem;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff;
+        }
+
+        /* Contenedor de libros */
+        .book-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Tarjetas de libros */
+        .book-card {
+            background-color: #1a1a1a;
+            border: 2px solid #00aaff;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 170, 255, 0.3);
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 170, 255, 0.6);
+        }
+
+        .book-card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #00aaff;
+        }
+
+        .book-card h3 {
+            font-size: 1.2rem;
+            color: #00aaff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px #00aaff;
+        }
+
+        .book-card p {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .book-card a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #00aaff;
+            color: #000;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .book-card a:hover {
+            background-color: #0088cc;
+            box-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff;
+        }
+
+        /* Animación de fondo */
+        @keyframes glow {
+            0% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 100% 0;
+            }
+            100% {
+                background-position: 0 0;
+            }
+        }
+
+        /* Fondo extendido hasta abajo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #00aaff, #000, #00aaff, #000);
+            z-index: -1;
+            opacity: 0.1;
+            animation: glow 10s infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .book-container {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* 3 tarjetas por fila en tablets */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-container img {
+                max-width: 80%;
+            }
+
+            .welcome-message {
+                font-size: 1rem;
+            }
+
+            .search-bar input {
+                font-size: 0.9rem;
+            }
+
+            .book-container {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* 3 tarjetas por fila en móviles */
+            }
+
+            .book-card {
+                padding: 15px;
+            }
+
+            .book-card h3 {
+                font-size: 1rem;
+            }
+
+            .book-card p {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container img {
+                max-width: 70%;
+            }
+
+            .welcome-message {
+                font-size: 0.9rem;
+            }
+
+            .search-bar input {
+                font-size: 0.8rem;
+            }
+
+            .book-container {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* 3 tarjetas por fila en móviles pequeños */
+            }
+
+            .book-card {
+                padding: 10px;
+            }
+
+            .book-card h3 {
+                font-size: 0.9rem;
+            }
+
+            .book-card p {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo -->
+    <div class="logo-container">
+        <img src="https://i.ibb.co/PvyCc4xV/Copia-de-Copia-de-Copia-de-Copia-de-Gold-Black-Modern-and-Elegant-Creative-Agency-You-Tube-Channel-A.jpg" alt="Logo">
+    </div>
+
+    <!-- Banner publicitario -->
+    <div class="banner">
+        <a href="https://krizg2024.github.io/Tarot-Agora/" target="_blank">
+            <img src="https://i.ibb.co/xqF8NKHg/Tirada-de-tres-cartas.jpg" alt="Banner Publicitario">
+        </a>
+    </div>
+
+    <!-- Mensaje de bienvenida -->
+    <div class="welcome-message">
+        <p>Bienvenido a nuestra Biblioteca Digital. Explora nuestra colección de libros clásicos y contemporáneos. ¡Encuentra tu próxima lectura favorita!</p>
+    </div>
+
+    <!-- Barra de búsqueda -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Buscar libros...">
+    </div>
+
+    <!-- Contenedor de libros -->
+    <div class="book-container" id="bookContainer">
+        <!-- Los libros se añaden dinámicamente aquí -->
+    </div>
+
+    <script>
+        const books = [
+    {
+        title: "Alan Chapman - Magia avanzada para principiantes",
+        imageUrl: "https://prodimage.images-bn.com/pimages/9781904658412_p0_v3_s600x595.jpg",
+        downloadUrl: "https://drive.google.com/file/d/16zeibpVGIvZAGthD-E7Yd1t0qQsqnTex/view?usp=sharing",
+        description: "Una guía práctica para adentrarse en el mundo de la magia moderna."
+    },
+    {
+        title: "Ray Sherwin - El libro de los resultados",
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhJrAOSBiHRqFWa43ytrgzDkyjEKk70lHvNg&s",
+        downloadUrl: "https://drive.google.com/file/d/1d8e8a7e-_PEECiAD3l_xQk4qhoiRBceX/view?usp=sharing",
+        description: "Explora técnicas efectivas para lograr resultados mágicos."
+    },
+    {
+        title: "Ray Sherwin - El teatro de la magia",
+        imageUrl: "https://weiserantiquarian.cdn.bibliopolis.com/pictures/55620.jpg?auto=webp&v=1525885829",
+        downloadUrl: "https://drive.google.com/file/d/1kq_DJ6nvj-rqpTu_ge9DWyGPp983g1b_/view?usp=sharing",
+        description: "Un enfoque teatral y práctico de la magia ritual."
+    },
+    {
+        title: "Frater UD - Magia práctica de los sigilos",
+        imageUrl: "https://images.cdn1.buscalibre.com/fit-in/360x360/b8/30/2b9e958b7773dada3cf9a1b8b22c4580.jpg",
+        downloadUrl: "https://drive.google.com/file/d/18LdiSBX2WCkUynZ_uV-7PoC0yMMcrGlN/view?usp=drive_link",
+        description: "Aprende a crear y usar sigilos para manifestar tus deseos."
+    },
+    {
+        title: "Jan Fries - Magia(k) visual",
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX7PWe3-G79Z01atEkKeGD3AMbwEN3cETTsA&s",
+        downloadUrl: "https://drive.google.com/file/d/1r5KRuTDmTmWPYHupJmdOLDcUtMCi5JLi/view?usp=sharing",
+        description: "Un enfoque visual y creativo de la magia."
+    },
+    {
+        title: "Bluefluke 'El traidor' - Manual de campo del psiconauta",
+        imageUrl: "https://ia801609.us.archive.org/BookReader/BookReaderImages.php?zip=/5/items/the-psychonaut-field-manual/The%20Psychonaut%20Field%20Manual_jp2.zip&file=The%20Psychonaut%20Field%20Manual_jp2/The%20Psychonaut%20Field%20Manual_0000.jp2&id=the-psychonaut-field-manual&scale=4&rotate=0",
+        downloadUrl: "https://drive.google.com/file/d/1xMr6eeWJ7WQbwL1MJwDo4ZTXqja2Zkdf/view?usp=drive_link",
+        description: "Una guía ilustrada para la exploración de la mente y la magia."
+    },
+    {
+        title: "Robert Anton Wilson - Prometeo Asciende",
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlPgRGKnrmGvG9EswMOL8rdCcQ-JUmzbVE0w&s",
+        downloadUrl: "https://drive.google.com/file/d/1nKbPaZP0RvvomxcFkqyitiHzNhgyqZsC/view?usp=sharing",
+        description: "Un viaje a través de la psicodelia, la magia y la filosofía."
+    },
+    {
+        title: "Austin Osman Spare - El libro del placer",
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJbMKGcJ7kbM-mwSdhuuvReAULMLjAMlyVEw&s",
+        downloadUrl: "https://drive.google.com/file/d/1ThkqgT4knSQ_T3pM1DwRSEiDmtPwWy0T/view?usp=drive_link",
+        description: "Un clásico de la magia del caos y el arte de los sigilos."
+    },
+    {
+        title: "Phil Hine - Caos primordial",
+        imageUrl: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1328044695i/420560.jpg",
+        downloadUrl: "https://drive.google.com/file/d/1zhZ0P-EmPU7nE50_Ab5bzDgHhAnFbWUj/view?usp=sharing",
+        description: "Una introducción a la magia del caos y sus prácticas."
+    },
+    {
+        title: "Phil Hine - Caos condensado",
+        imageUrl: "https://pictures.abebooks.com/isbn/9781618696632-us.jpg",
+        downloadUrl: "https://drive.google.com/file/d/1PfJkVGDT8oScs438RM421yIscnCN-6iC/view?usp=sharing",
+        description: "Una guía concisa y práctica de la magia del caos."
+    },
+    {
+        title: "Damon Brand - Servidores mágicos",
+        imageUrl: "https://http2.mlstatic.com/D_NQ_NP_727665-MLA81248869458_122024-O.webp",
+        downloadUrl: "https://drive.google.com/file/d/1kq_DJ6nvj-rqpTu_ge9DWyGPp983g1b_/view?usp=sharing",
+        description: "Cómo crear y trabajar con servidores mágicos."
+    },
+    {
+        title: "Damon Brand- Palabras de poder",
+        imageUrl: "https://m.media-amazon.com/images/I/81WkoZzM1UL._AC_UF1000,1000_QL80_.jpg",
+        downloadUrl: "https://drive.google.com/file/d/1zYv4cccprFeEo-mlNkb2cfNXjnQBpslL/view?usp=sharing",
+        description: "El uso de palabras y lenguaje en la magia."
+    },
+    {
+        title: "Damon Brand - Protección mágica",
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY4T6zJGD9nonHEL3_3ot03K_DTHFWSgJmJw&s",
+        downloadUrl: "https://drive.google.com/file/d/1WyvrcxeesH4hMcWiQ5S2PYy60sOIPD1V/view?usp=drivesdk",
+        description: "Técnicas y rituales para la protección mágica."
+    },
+    {
+        title: "Damon Brand - Arcángeles de la magia",
+        imageUrl: "https://m.media-amazon.com/images/I/61+yP-QtHvL.jpg",
+        downloadUrl: "https://drive.google.com/file/d/1gPXcBG0iYQKIWpHm8GR1on5EFZvuP_qN/view?usp=sharing",
+        description: "Trabajo con arcángeles en la práctica mágica."
+    },
+    {
+        title: "Damon Brand - Magickal Cashbook (español)",
+        imageUrl: "https://images.cdn3.buscalibre.com/fit-in/360x360/7f/0f/7f0fe153667ccb807eb6266da026b58f.jpg",
+        downloadUrl: "https://drive.google.com/file/d/1F9Xx_JlgG4CP2geA4Yfm-f7vLm0WROWm/view?usp=sharing",
+        description: "Un manual práctico de magia moderna para la fortuna."
+    },
+    {
+        title: "Damon Brand - Angeles de la ira",
+        imageUrl: "https://m.media-amazon.com/images/I/61pSnucdINL._AC_UF1000,1000_QL80_.jpg",
+        downloadUrl: "https://drive.google.com/file/d/1uVDLrJp14tSwQ2_OxD5FrHWpv1h1IxEu/view?usp=sharing",
+        description: "Trabajo con entidades para canalizar la ira."
+    },
+    {
+        title: "Grant Morrison - Magia pop (extracto de texto)",
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyLC50iI9YN-tsfQHLqcFkDV_UNDXjiC3fAA&s",
+        downloadUrl: "https://drive.google.com/file/d/166NU4hwn1_qlmSt6zhzUk7HAbC3OatzR/view?usp=sharing",
+        description: "Un vistazo a la magia en la cultura pop."
+    },
+    {
+        title: "Peter J. Carroll - Liber Null & Psiconauta (nueva edición)",
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFxBCINOnhNVFSFdFpAi-LVfzVGRjWRltKAQ&s",
+        downloadUrl: "https://drive.google.com/file/d/16sNCtDC4ydHW5uO-ah71iC0IGKjnC_6K/view?usp=sharing",
+        description: "Un clásico de la magia del caos."
+    },
+    {
+        title: "Peter J. Carroll - Époch (el esotericón y los portales del caos)",
+        imageUrl: "https://m.media-amazon.com/images/I/71RSoqOjRzL._AC_UF1000,1000_QL80_.jpg",
+        downloadUrl: "https://drive.google.com/file/d/1XLhivZ1T6ZBgXORXAs06abC91JE8pwlp/view?usp=drive_link",
+        description: "Exploración de los portales del caos y el esotericón."
+    },
+    {
+        title: "Peter J. Carroll - La filosofía y la práctica de la magia (texto breve)",
+        imageUrl: "https://inversionica.com/assets/front/img/user/blogs/1733972344.jpg",
+        downloadUrl: "https://drive.google.com/file/d/19ZHhSr4Jno1a2t4nJyn8OjD6mBuQEbTW/view?usp=sharing",
+        description: "Una introducción a la filosofía y práctica mágica."
+    },
+    {
+        title: "Peter J. Carroll - Liber Kaos",
+        imageUrl: "https://images.cdn1.buscalibre.com/fit-in/360x360/a4/54/a454e4292e309dea1f4a0a58ef278148.jpg",
+        downloadUrl: "https://drive.google.com/file/d/1Gw2_XZjN_IzE1a9iSKM72W1m8T5Ze734/view?usp=drive_link",
+        description: "Un manual avanzado de magia del caos."
+    },
+    {
+        title: "Peter J. Carroll - La postura de la muerte (texto breve)",
+        imageUrl: "https://inversionica.com/assets/front/img/user/blogs/1733972344.jpg",
+        downloadUrl: "https://drive.google.com/file/d/1o8Dnm-4S1RuapZJ7n7vU2qmbkmn9uB5N/view?usp=sharing",
+        description: "Técnicas mágicas relacionadas con la muerte y el renacimiento."
+    },
+    {
+        title: "Peter J. Carroll - Un trabajo mágico más efectivo (texto breve)",
+        imageUrl: "https://inversionica.com/assets/front/img/user/blogs/1733972344.jpg",
+        downloadUrl: "https://drive.google.com/file/d/1sAmZmXyTSQrZIJLcPzQpmUqs2vBc3gcB/view?usp=sharing",
+        description: "Consejos para mejorar la efectividad en la práctica mágica."
+    },
+    {
+        title: "Peter J. Carroll - Voluntad (texto breve)",
+        imageUrl: "https://inversionica.com/assets/front/img/user/blogs/1733972344.jpg",
+        downloadUrl: "https://drive.google.com/file/d/1oBXC6sSPTs5_rzHHd2a1YuuHa-JTY3Ud/view?usp=drive_link",
+        description: "El poder de la voluntad en la magia."
+    },
+    {
+        title: "Peter J. Carroll - Principio caótica (texto breve)",
+        imageUrl: "https://inversionica.com/assets/front/img/user/blogs/1733972344.jpg",
+        downloadUrl: "https://drive.google.com/file/d/1JMkEu8xqfWLytI-cwjtyzTT3VN24rlX_/view?usp=sharing",
+        description: "Exploración del principio caótico en la magia."
+    },
+    {
+        title: "Peter J. Carroll - Compendio del caos: la magia de los iluminados de tanateros",
+        imageUrl: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1420432445i/9278307.jpg",
+        downloadUrl: "https://drive.google.com/file/d/1eReDewUg7WXMJqXIYIDWI0Hv4NdayAq9/view?usp=drive_link",
+        description: "Un compendio de técnicas y filosofías de la magia del caos."
+    }
+];
+        const bookContainer = document.getElementById('bookContainer');
+        const searchInput = document.getElementById('searchInput');
+
+        function renderBooks(filteredBooks) {
+            bookContainer.innerHTML = '';
+            filteredBooks.forEach(book => {
+                const bookCard = document.createElement('div');
+                bookCard.className = 'book-card';
+                bookCard.innerHTML = `
+                    <img src="${book.imageUrl}" alt="${book.title}">
+                    <h3>${book.title}</h3>
+                    <p>${book.description}</p>
+                    <a href="${book.downloadUrl}" target="_blank">Descargar</a>
+                `;
+                bookContainer.appendChild(bookCard);
+            });
+        }
+
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredBooks = books.filter(book => book.title.toLowerCase().includes(searchTerm));
+            renderBooks(filteredBooks);
+        });
+
+        // Renderizar todos los libros al cargar la página
+        renderBooks(books);
+    </script>
+</body>
+</html>
