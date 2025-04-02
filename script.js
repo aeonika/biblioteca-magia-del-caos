@@ -353,16 +353,13 @@
         title: "El Tarot Hermético (Mazo para Imprimir) - Godfrey Dowson",
         imageUrl: "https://mochoroxo.com/wp-content/uploads/2023/12/The-hermetic-tarot-by-godfrey-dowson-510x510.webp",
         downloadUrl: "https://drive.google.com/file/d/1yDD49wZZJ3_wVCzaZe8Qnpp904hPstwq/view?usp=sharing",
-        description: "Descubre el profundo simbolismo del Tarot Hermético de Godfrey Dowson, ahora disponible para imprimir y conectar con la sabiduría ancestral. Sumérgete en un viaje de autoconocimiento a través de este mazo único que fusiona arte y esoterismo.
-"
+        description: "Descubre el profundo simbolismo del Tarot Hermético de Godfrey Dowson, ahora disponible para imprimir y conectar con la sabiduría ancestral. Sumérgete en un viaje de autoconocimiento a través de este mazo único que fusiona arte y esoterismo"
     },
-
    {
         title: "Tarot Hermético Manual - Godfrey Dowson",
         imageUrl: "https://m.media-amazon.com/images/I/91v9h1ZwMlL._SL1500_.jpg",
         downloadUrl: "https://drive.google.com/file/d/1gyoo6kyjtDAczDrsDs7MJeuIC637H2_C/view?usp=sharing",
-        description: "Un exhaustivo manual sobre el Tarot Hermético, explorando su simbolismo profundo y su conexión con la magia y la sabiduría ancestral. Una guía esencial para estudiantes y practicantes que buscan comprender y aplicar este poderoso sistema adivinatorio.
-"
+        description: "Un exhaustivo manual sobre el Tarot Hermético, explorando su simbolismo profundo y su conexión con la magia y la sabiduría ancestral. Una guía esencial para estudiantes y practicantes que buscan comprender y aplicar este poderoso sistema adivinatorio"
     },
 
                 {
